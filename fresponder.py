@@ -6,11 +6,11 @@ from chatterbot import ChatBot
 
 class Responder:
 	def __init__(self):
-		text = open("markov.txt", "r").read()
+		text = open("data/markov.txt", "r").read()
 		self.model = markovify.Text(text)
 		self.bot = ChatBot('Fred', trainer='chatterbot.trainers.ChatterBotCorpusTrainer')
 		# This part takes a while
-		self.bot.train(["./chatter.yml"])
+		self.bot.train(["./data/chatter.yml"])
 
 	def make_sentence(self):
 		return self.model.make_sentence()

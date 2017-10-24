@@ -13,8 +13,8 @@ reddit = praw.Reddit(client_id=c_id, client_secret=c_secret, user_agent="FredBot
 fred = reddit.redditor("FredHamptonsGhost")
 
 # ChatterBot data is in YAML format, Markov data is in regular ol' text
-chatter_file= open("chatter.yml", "w")
-markov_file= open("markov.txt", "w")
+chatter_file= open("data/chatter.yml", "w")
+markov_file= open("data/markov.txt", "w")
 
 # Part of the YAML data
 conversations = []

@@ -3,3 +3,4 @@
 !*.yml
 !*.txt
 !.gitignore
+!data
