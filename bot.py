@@ -47,6 +47,7 @@ def main():
 				if current_submission.author in good_users:
 					print("\tThis submission was made by the proper user")
 					current_submission.reply(fred.make_sentence())
+					print("\tPosted")
 				else:
 					print("\tSkipping though...")
 				latest_ids[i] = current_submission_id

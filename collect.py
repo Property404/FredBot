@@ -20,7 +20,7 @@ markov_file= open("data/markov.txt", "w")
 conversations = []
 
 count = 0
-limit = 4000
+limit = 5000
 for comment in fred.comments.new(limit=limit):
 	text = comment.body
 	if comment.is_root:
