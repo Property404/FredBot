@@ -4,13 +4,14 @@
 
 import yaml
 import praw
+import settings
 
 c_id = open("secret/client_id").read()
 c_secret = open("secret/client_secret").read()
 
 # Get Fred
 reddit = praw.Reddit(client_id=c_id, client_secret=c_secret, user_agent="FredBot")
-fred = reddit.redditor("FredHamptonsGhost")
+fred = reddit.redditor(settings.target_username)
 
 # ChatterBot data is in YAML format, Markov data is in regular ol' text
 chatter_file= open("data/chatter.yml", "w")

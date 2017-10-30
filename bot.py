@@ -4,28 +4,31 @@ import sys
 import getpass
 import fresponder
 import time
+import settings
 
 c_id = open("secret/client_id").read()
 c_secret = open("secret/client_secret").read()
 
+username_to_use = settings.bot_username
 reddit = praw.Reddit(client_id = c_id,
 	client_secret = c_secret,
-	user_agent = "FredBot",
-	username = "FredHamptonsGhostv2",
-	password = getpass.getpass(prompt="password>") 
+	user_agent = settings.user_agent,
+	username = username_to_use,
+	password = getpass.getpass(prompt=f"username: {username_to_use}\npassword: ") 
 	)
 
 # Subreddits we're monitoring
-subreddit_names = ["Playground404"]
+subreddit_names = settings.debug_subreddits
 run_type = "debug"
 if(len(sys.argv)>1 and sys.argv[1] == "release"):
 	run_type = "release"
-	subreddit_names.append("blackfellas")
+	subreddit_names = settings.release_subreddits
+
 print(f"Run type: {run_type}")
 subreddits = [reddit.subreddit(sr_name) for sr_name in ["Playground404"]]
 
 # Users whose posts we can directly respond to
-good_users = ["Automoderator", "Property404", "FredHamptonsGhost"]
+good_users = settings.answerable_users
 
 # Fred the AI
 fred = fresponder.Responder()
@@ -63,7 +66,7 @@ while True:
 	try:
 		main()
 	except Exception as e:
-		seconds_to_wait = 60*3
+		seconds_to_wait = 60*.3
 		print(f"Exception occured: {e}\nWaiting for {seconds_to_wait} seconds")
 		time.sleep(seconds_to_wait)
 		print("Restarting")
