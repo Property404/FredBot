@@ -66,7 +66,7 @@ while True:
 	try:
 		main()
 	except Exception as e:
-		seconds_to_wait = 60*.3
+		seconds_to_wait = 60*2
 		print(f"Exception occured: {e}\nWaiting for {seconds_to_wait} seconds")
 		time.sleep(seconds_to_wait)
 		print("Restarting")
