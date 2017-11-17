@@ -25,7 +25,7 @@ if(len(sys.argv)>1 and sys.argv[1] == "release"):
 	subreddit_names = settings.release_subreddits
 
 print(f"Run type: {run_type}")
-subreddits = [reddit.subreddit(sr_name) for sr_name in ["Playground404"]]
+subreddits = [reddit.subreddit(sr_name) for sr_name in subreddit_names]
 
 # Users whose posts we can directly respond to
 good_users = settings.answerable_users
@@ -38,7 +38,7 @@ def getLatestSubmission(subreddit):
 		return post
 
 def main():
-	latest_ids = [getLatestSubmission(sr).id for sr in subreddits]
+	latest_ids = [42 for src in subreddits]
 
 	while True:
 		for i in range(len(subreddits)):
@@ -46,11 +46,11 @@ def main():
 			current_submission = getLatestSubmission(subreddit)
 			current_submission_id = current_submission.id
 			if latest_ids[i] != current_submission_id:
-				print("New submission!")
+				print(f"New submission in {subreddit_names[i]}!")
 				if current_submission.author in good_users:
-					print("\tThis submission was made by the proper user")
+					print(f"\tThis submission was made by the proper user")
 					current_submission.reply(fred.make_sentence())
-					print("\tPosted")
+					print("\tPosted");time.sleep(12)
 				else:
 					print("\tSkipping though...")
 				latest_ids[i] = current_submission_id
@@ -59,14 +59,14 @@ def main():
 			print("Fan message received")
 			if isinstance(item, praw.models.Comment):
 				print("\tResponding to a fan...")
-				item.reply(fred.get_response(item.body))
+				item.reply(fred.get_response(item.body));time.sleep(10)
 			item.mark_read()
 
 while True:
 	try:
 		main()
 	except Exception as e:
-		seconds_to_wait = 60*2
+		seconds_to_wait = 60*10
 		print(f"Exception occured: {e}\nWaiting for {seconds_to_wait} seconds")
 		time.sleep(seconds_to_wait)
 		print("Restarting")
